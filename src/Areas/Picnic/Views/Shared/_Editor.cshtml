@@ -23,11 +23,12 @@
 			selector: '#editor',
 			theme: 'modern',
 			paste_data_images: true,
-			menubar: '', // TODO: Allow menubar customization in the future
+			menubar: '',
 			plugins: '@string.Join(" ", options.Plugins)',
 			toolbar1: '@string.Join(" ", options.Buttons)',
 			branding: false,
 			content_css: '@string.Join(",", options.Stylesheets)',
+			min_height: @options.MinHeight,
 			file_picker_callback: function(callback, value, meta) {
 				if (meta.filetype === 'image') {
 					$('#tinyMceUpload').trigger('click');

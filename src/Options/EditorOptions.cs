@@ -24,7 +24,12 @@ namespace Picnic.Options
         /// Gets or sets the EditorBaseUrl
         /// </summary>
         public string EditorBaseUrl { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the minumum height, in pixels, of the editor
+        /// </summary>
+        public int MinHeight { get; set; }
+
         /// <summary>
         /// Adds one or more plugins to the editor
         /// </summary>
@@ -59,7 +64,8 @@ namespace Picnic.Options
         {
             Plugins = new List<string> { "code", "searchreplace", "fullscreen", "image", "link", "media", "table", "charmap", "hr", "nonbreaking", "anchor", "advlist", "lists", "textcolor", "contextmenu", "colorpicker", "help" },
             Buttons = new List<string> { "insertfile", "formatselect", "|", "bold", "italic", "strikethrough", "forecolor", "backcolor", "|", "alignleft", "aligncenter", "alignright", "alignjustify", "|", "anchor", "link", "image", "media", "hr", "table", "|", "numlist", "bullist", "outdent", "indent", "|", "removeformat", "|", "code", "fullscreen" },            
-            Stylesheets = new List<string>()
+            Stylesheets = new List<string>(),
+            MinHeight = 200
         };
     }
 }
