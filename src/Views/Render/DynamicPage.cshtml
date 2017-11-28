@@ -1,0 +1,19 @@
+﻿@inject IOptions<PicnicOptions> OptionsProvider
+
+@using Microsoft.Extensions.Options
+@using Picnic.Options
+@model Picnic.Model.Page
+
+@{
+	var options = this.OptionsProvider.Value;
+	if (!string.IsNullOrWhiteSpace(options.DynamicView.Layout))
+	{
+		this.Layout = options.DynamicView.Layout;
+	}
+
+	ViewData["Title"] = Model.Title;
+	ViewData["Description"] = Model.Description;
+	ViewData["Canonical"] = Model.Canonical;
+}
+
+@Html.Raw(Model.Content)

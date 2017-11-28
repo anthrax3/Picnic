@@ -1,0 +1,18 @@
+﻿@using Microsoft.Extensions.Options
+@using Picnic.Model;
+@using Picnic.Controllers
+@using Picnic.Options;
+@using Picnic.Extensions;
+
+@inject IOptions<PicnicOptions> OptionsProvider
+
+@{
+	Layout = "~/Areas/Picnic/Views/Shared/_Layout.cshtml";
+
+	var options = this.OptionsProvider.Value;
+	if (!string.IsNullOrWhiteSpace(options.Manage.Layout))
+	{
+		this.Layout = options.Manage.Layout;
+	}
+}
+

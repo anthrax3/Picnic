@@ -1,0 +1,21 @@
+﻿@using Picnic.Areas.Picnic.Controllers
+@model Page
+
+@section BreadCrumbs
+	{
+	<ol class="breadcrumb">
+		<li><a href="@Url.Action(nameof(RootController.Index), "Root")">Home</a></li>
+		<li><a href="@Url.Action(nameof(PageController.List), "Page")">Pages</a></li>
+		<li class="active">Edit Page</li>
+	</ol>
+}
+
+<div id="vw-page-edit">
+	<div class="page-header">
+		<h1>Edit Page</h1>
+	</div>
+	<form asp-action="Edit" data-editor-target="#Content">
+		@Html.Partial("_PageForm", Model)
+		<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Save Changes</button>
+	</form>
+</div>

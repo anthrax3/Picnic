@@ -1,0 +1,107 @@
+﻿@using Picnic.Areas.Picnic.Controllers
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Picnic Content Management</title>
+		
+		<style type="text/css">
+			@@font-face { font-family: 'Roboto';
+				src: url('@Url.Static("/fonts/Roboto-Regular.ttf")') format('truetype');
+			}
+		</style>
+
+		<link rel="stylesheet" href="@Url.Static("/css/picnic.min.css")" />
+
+		@* jQuery $() Queue -- Taken from: http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/ *@
+		<script>(function (w, d, u) { w.readyQ = []; w.bindReadyQ = []; function p(x, y) { if (x === "ready") { w.bindReadyQ.push(y); } else { w.readyQ.push(x); } }; var a = { ready: p, bind: p }; w.$ = w.jQuery = function (f) { if (f === d || f === u) { return a } else { p(f) } } })(window, document)</script>
+		
+		@* Set Root for Client *@
+		<script>
+			window.root = "@Url.Action(nameof(RootController.Index), "Root", new { Area = "Picnic" })";
+		</script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="@Url.Action(nameof(RootController.Index), "Root")">Picnic</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="@Url.Action(nameof(PageController.List), "Page")"><span class="glyphicon glyphicon-file"></span> Pages</a></li>
+						<li><a href="@Url.Action(nameof(ContentController.List), "Content")"><span class="glyphicon glyphicon-pencil"></span> Content</a></li>
+					</ul>						
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="https://github.com/ctorx/picnic">Picnic @@ github</a></li>							
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			@RenderSection("Breadcrumbs", false)			
+			@Html.Partial("_MessageList")
+			@RenderBody()
+		</div>
+		
+		@* Modal Containers *@
+		<div id="standby" class="modal">
+			<span></span>
+			<img src="@Url.Static("/images/spinner.gif")" alt="" />
+		</div>
+ 
+		<!-- Alert Modal -->
+		<div id="modal" class="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title"></h4>
+					</div>
+					<div class="modal-body"><p></p></div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="@Url.Static("/js/picnic.min.js")"></script>
+		
+		<script id="msg-template" type="text/x-handlebars-template">
+			<div class="alert alert-{{class}} alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button> 
+				<span class="glyphicon glyphicon-{{icon}}"></span> <strong>{{caption}}</strong> {{message}}
+			</div>
+		</script>
+		
+		@if (TempData["Message"] != null)
+		{
+			<script>
+				$(function() {
+					app.msg("success", "yes", "@(TempData["Message"].ToString())", false);
+				});
+			</script>
+		}
+
+		@* jQuery $() Queue -- Taken from: http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/ *@
+		<script>
+			(function ($, d) {
+				$.each(readyQ, function(i, f) { $(f) });
+				$.each(bindReadyQ, function(i, f) { $(d).bind("ready", f) });
+			})(jQuery, document)
+		</script>
+	</body>
+</html>

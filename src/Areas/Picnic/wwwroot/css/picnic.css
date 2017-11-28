@@ -1,0 +1,56 @@
+﻿/* ------------------------------------------------------------------------------------------------ */
+/* Core Styles and Bootstrap Overrides  ------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+/* Global Font */
+* { font-family: 'Roboto', Fallback, sans-serif; }
+
+/* Navbar */
+.navbar { border-radius: 0; }
+
+/* Page Header Button */
+.page-header { position: relative; margin: 20px 0 20px; }
+.page-header .btn { position: absolute; top: 4px; right: 0; }
+
+/* StandBy Modal */
+#standby.modal {
+    text-align: center;
+    display: none;
+    background-color: #111;
+    opacity: .20;
+    z-index: 99999;
+}
+
+#standby span {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+#alert.modal {
+    display: none;
+}
+
+/* Messaging */
+#messages span.glyphicon { display: inline-block; margin-right: 4px; }
+#messages strong { display: inline-block; margin-right: 4px; }
+
+/* ------------------------------------------------------------------------------------------------ */
+/* View Specific ------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+/*#vw-page-new textarea.form-control#Description, #vw-page-edit textarea.form-control#Description {
+    height: 108px;
+}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    #vw-content-list table thead tr th:last-of-type,
+    #vw-page-list table thead tr th:last-of-type,
+    #vw-content-list table thead tr th:nth-last-child(2),
+    #vw-page-list table thead tr th:nth-last-child(2)
+    {
+        width: 65px;
+    }
+}
+

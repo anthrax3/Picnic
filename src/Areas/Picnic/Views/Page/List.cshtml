@@ -1,0 +1,45 @@
+﻿@using Picnic.Areas.Picnic.Controllers
+@model IList<Page>
+
+<ol class="breadcrumb">
+	<li><a href="@Url.Action(nameof(RootController.Index), "Root")">Home</a></li>
+	<li class="active">Manage Pages</li>
+</ol>
+
+<div id="vw-page-list">
+	<div class="page-header">
+		<h1>Pages</h1>
+		<a href="@Url.Action(nameof(PageController.New), "Page")" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> New Page</a>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">@Model.Count() Pages</h3>
+		</div>
+
+		<table class="table table-striped dataTable data-table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th class="hidden-xs">Url Path</th>
+					<th class="hidden-xs text-center">Active</th>
+					<th class="text-center" data-orderable="false"></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var page in Model)
+				{
+					<tr>
+						<td>@(page.Name)</td>
+						<td>@(page.Path)</td>
+						<td>@(page.IsActive ? "Yes" : "No")</td>
+						<td class="text-center">
+							<a href="@Url.Action(nameof(PageController.Edit), "Page", new { id = page.Id })" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-pencil"></span></a>
+							<button class="btn btn-sm btn-danger" data-type="page" data-id="@(page.Id)"><span class="glyphicon glyphicon-remove"></span></button>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,57 @@
+﻿@using Microsoft.Extensions.Options;
+@inject IOptions<PicnicOptions> PicnicOptionsProvider
+@model string
+
+@{
+	var options = this.PicnicOptionsProvider.Value.Manage.EditorOptions;
+}
+
+<textarea id="editor" class="form-control">@Html.Raw(Model)</textarea>
+<input name="image" type="file" id="tinyMceUpload" class="hidden" onchange="">
+
+<script src="@Url.Static("/js/tinymce/tinymce.min.js")"></script>
+<script>
+	$(function () {
+		var editorTarget = $($('form[data-editor-target]').attr('data-editor-target'));
+
+		@if (!string.IsNullOrWhiteSpace(options.EditorBaseUrl))
+		{
+			<text>tinyMCE.baseURL = "@options.EditorBaseUrl";</text>
+		}
+
+		tinymce.init({
+			selector: '#editor',
+			theme: 'modern',
+			paste_data_images: true,
+			menubar: '', // TODO: Allow menubar customization in the future
+			plugins: '@string.Join(" ", options.Plugins)',
+			toolbar1: '@string.Join(" ", options.Buttons)',
+			branding: false,
+			content_css: '@string.Join(",", options.Stylesheets)',
+			file_picker_callback: function(callback, value, meta) {
+				if (meta.filetype === 'image') {
+					$('#tinyMceUpload').trigger('click');
+					$('#tinyMceUpload').on('change', function() {
+						top.app.state.working();
+						var file = this.files[0];
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							callback(e.target.result, { alt: '' });
+							top.app.state.ready();
+						};						
+						reader.readAsDataURL(file);						
+					});
+				}
+			},
+			setup: function (editor) {
+				editor.on("change", function(e) {
+					editorTarget.val(editor.getContent());
+				});
+				editor.on("keyup", function(){
+					editorTarget.val(editor.getContent());
+				});
+			}
+		});
+	});
+</script>
+

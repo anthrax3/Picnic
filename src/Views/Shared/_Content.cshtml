@@ -1,0 +1,19 @@
+﻿@using Picnic.Service
+@using Picnic.Stores
+@using Picnic.Stores.Json
+@inject IContentService ContentService
+
+@model string
+@{
+	var content = await this.ContentService.GetByKeyAsync(Model);
+}
+
+@if (content != null && content.IsActive)
+{
+	<!-- ContentId: @content.Id -->
+	@Html.Raw(content.Value)
+}
+else
+{
+	<!-- ContentId: @Model DOES NOT EXIST -->
+}

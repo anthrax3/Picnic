@@ -1,0 +1,49 @@
+﻿@using Picnic.Areas.Picnic.Controllers
+@model IList<Content>
+
+@section Breadcrumbs
+{
+	<ol class="breadcrumb">
+		<li><a href="@Url.Action(nameof(RootController.Index), "Root")">Home</a></li>
+		<li><a href="@Url.Action(nameof(ContentController.List), "Content")">Content</a></li>
+		<li class="active">Manage Content</li>
+	</ol>
+}
+
+<div id="vw-content-list">
+	<div class="page-header">
+		<h1>Manage Content</h1>
+		<a href="@Url.Action(nameof(ContentController.New), "Content")" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> New Content</a>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Content Records</h3>
+		</div>
+
+		<table class="table table-striped dataTable data-table">
+			<thead>
+				<tr>
+					<th>Key</th>
+					<th>Name</th>
+					<th class="text-center">Active</th>
+					<th class="text-center" data-orderable="false"></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var content in Model)
+				{
+					<tr>
+						<td>@(content.Key)</td>
+						<td>@(content.Name)</td>
+						<td class="text-center">@(content.IsActive ? "Yes" : "No")</td>
+						<td class="text-center">
+							<a href="@Url.Action(nameof(ContentController.Edit), "Content", new { id = content.Id })" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-pencil"></span></a>
+							<button class="btn btn-sm btn-danger" data-type="content" data-id="@content.Id"><span class="glyphicon glyphicon-remove"></span></button>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

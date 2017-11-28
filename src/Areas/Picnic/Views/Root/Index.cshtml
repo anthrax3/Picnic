@@ -1,0 +1,67 @@
+﻿@using Picnic.Areas.Picnic.Controllers
+@model IList<IPicnicEntity>
+
+@{
+	var pages = Model.Where(x => x.GetType().IsAssignableFrom(typeof(Page))).Cast<Page>().ToList();
+	var content = Model.Where(x => x.GetType().IsAssignableFrom(typeof(Content))).Cast<Content>().ToList();
+}
+
+@section Breadcrumbs
+{ 
+	<ol class="breadcrumb">
+		<li><a class="active">Home</a></li>
+	</ol>
+}
+
+<div class="page-header">
+	<h1>Picnic CMS</h1>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Recent Pages</h3>						
+			</div>
+			<div class="panel-body">
+				@if (pages.Any())
+				{
+					<ul>
+						@foreach (var page in pages.OrderByDescending(x => x.LastModifyDate))
+						{
+							<li><a href="@Url.Action(nameof(PageController.Edit), "Page", new {id = page.Id})">@(page.Name)</a></li>
+						}
+					</ul>
+				}
+				else
+				{
+					<strong>No pages yet</strong>
+				}
+			</div>				
+		</div>		
+		<a href="@Url.Action(nameof(PageController.New), "Page")" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> New Page</a>
+	</div>		
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Recent Content</h3>
+			</div>
+			<div class="panel-body">
+				@if (content.Any())
+				{
+					<ul>
+						@foreach (var contentEntry in content.OrderByDescending(x => x.LastModifyDate))
+						{
+							<li><a href="@Url.Action(nameof(ContentController.Edit), "Content", new {id = contentEntry.Id})">@contentEntry.Name</a></li>
+						}
+					</ul>
+				}
+				else
+				{
+					<strong>No content yet</strong>
+				}
+			</div>
+		</div>
+		<a href="@Url.Action(nameof(ContentController.New), "Content")" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> New Content</a>
+	</div>		
+</div>

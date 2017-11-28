@@ -1,0 +1,28 @@
+﻿[
+  {
+    "outputFileName": "Areas/Picnic/wwwroot/css/picnic.min.css",
+    "inputFiles": [
+      "Areas/Picnic/wwwroot/css/bootstrap.min.css",
+      "Areas/Picnic/wwwroot/css/dataTables.bootstrap.css",
+      "Areas/Picnic/wwwroot/css/picnic.css"
+    ]
+  },
+  {
+    "outputFileName": "Areas/Picnic/wwwroot/js/picnic.min.js",
+    "inputFiles": [
+      "Areas/Picnic/wwwroot/js/jquery.min.js",
+      "Areas/Picnic/wwwroot/js/bootstrap.min.js",
+      "Areas/Picnic/wwwroot/js/jquery.dataTables.min.js",
+      "Areas/Picnic/wwwroot/js/dataTables.bootstrap.min.js",
+      "Areas/Picnic/wwwroot/js/jquery.validate.min.js",
+      "Areas/Picnic/wwwroot/js/jquery.validate.unobtrusive.min.js",
+      "Areas/Picnic/wwwroot/js/handlebars.min.js",
+      "Areas/Picnic/wwwroot/js/picnic.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

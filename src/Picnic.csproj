@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <Version>0.9.30</Version>
+    <Authors>Matthew Marksbury</Authors>
+    <Company></Company>
+    <PackageProjectUrl>https://github.com/ctorx/Picnic</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ctorx/Picnic/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright (c) 2017 Matthew Marksbury</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>0.9.30</AssemblyVersion>
+    <FileVersion>0.9.30</FileVersion>
+    <Description>Picnic is a .NET Core CMS Extension for ASP.NET MVC Web Applications</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\css\picnic.min.css" />
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\js\picnic.min.js" />
+    <EmbeddedResource Include="**\*.cshtml" />
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\images\*.*" />
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\fonts\*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\js\tinymce\plugins\**\plugin.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\js\tinymce\skins\lightgray\fonts\tinymce.woff" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\js\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\js\tinymce\skins\lightgray\content.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\js\tinymce\skins\lightgray\skin.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\js\jquery.tinymce.min.js" />
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\js\tinymce\themes\modern\theme.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Picnic\wwwroot\js\tinymce\tinymce.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.6.362" />
+    <PackageReference Include="ctorx.Core.Mvc.Cookies" Version="1.0.0.1" />
+    <PackageReference Include="ctorx.Core.Mvc.Messaging" Version="1.0.0" />
+    <PackageReference Include="ctorx.JsonStore" Version="1.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Update="NETStandard.Library" Version="2.0.0" />
+  </ItemGroup>
+  
+</Project>

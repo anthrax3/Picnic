@@ -1,0 +1,21 @@
+﻿@using Picnic.Areas.Picnic.Controllers
+@model Content
+
+@section BreadCrumbs
+	{
+	<ol class="breadcrumb">
+		<li><a href="@Url.Action(nameof(RootController.Index), "Root")">Home</a></li>
+		<li><a href="@Url.Action(nameof(ContentController.List), "Content")">Content</a></li>
+		<li class="active">Edit Content</li>
+	</ol>
+}
+
+<div id="vw-content-edit">
+	<div class="page-header">
+		<h1>Edit Content</h1>
+	</div>
+	<form asp-action="Edit" data-editor-target="#Value">
+		@Html.Partial("_ContentForm", Model)
+		<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Save Changes</button>
+	</form>
+</div>
