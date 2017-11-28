@@ -6,7 +6,7 @@
 	var options = this.PicnicOptionsProvider.Value.Manage.EditorOptions;
 }
 
-<textarea id="editor" class="form-control">@Html.Raw(Model)</textarea>
+<textarea id="editor" class="form-control">@Model</textarea>
 <input name="image" type="file" id="tinyMceUpload" class="hidden" onchange="">
 
 <script src="@Url.Static("/js/tinymce/tinymce.min.js")"></script>
