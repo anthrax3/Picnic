@@ -100,19 +100,7 @@ namespace Picnic.Service
                 throw new ArgumentNullException(nameof(path));
             }
 
-            var normalized = new StringBuilder();
-
-            var prevChar = new char();
-            foreach (var current in path.ToCharArray())
-            {
-                if (current != prevChar)
-                {
-                    normalized.Append(current);
-                    prevChar = current;
-                }                
-            }
-
-            return $"/{normalized.ToString().Trim('/').Trim()}";
+            return $"/{path.Trim('/').Trim()}";
         }
     }
 }
