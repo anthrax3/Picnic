@@ -14,7 +14,7 @@ namespace Picnic.Options
     /// </summary>
     public class PicnicOptionsBuilder
     {
-        readonly IServiceCollection Services;
+        public readonly IServiceCollection Services;
 
         /// <summary>
         /// ctor the Mighty

@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Picnic.SimpleAuth\src\Picnic.SimpleAuth.csproj" />
     <ProjectReference Include="..\..\src\Picnic.csproj" />
   </ItemGroup>
 

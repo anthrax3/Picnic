@@ -8,20 +8,22 @@ namespace Picnic.Options
 {
     public class PicnicPrefixAppModelConvention : IApplicationModelConvention
     {
+        readonly string TargetNamespace;
         readonly AttributeRouteModel PrefixRouteModel;
 
         /// <summary>
         /// Creates a new PicnicAppModelConvention
         /// </summary>
         /// <param name="prefix">The prefix to be applied to picnic manage routes</param>
-        public PicnicPrefixAppModelConvention(string prefix = "picnic")
+        public PicnicPrefixAppModelConvention(string prefix = "picnic", string targetNamespace = null)
         {
+            this.TargetNamespace = targetNamespace;
             this.PrefixRouteModel = new AttributeRouteModel(new RouteAttribute(prefix));
         }
 
         public void Apply(ApplicationModel application)
         {
-            var restrictToNamespace = typeof(RootController).Namespace;
+            var restrictToNamespace = this.TargetNamespace ?? typeof(RootController).Namespace;
 
             // Loop through any controller matching our selector
             foreach (var controller in application.Controllers)
