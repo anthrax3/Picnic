@@ -49,7 +49,7 @@ namespace Samples.AspNetCore
                 options.Manage.EditorOptions.SetStylesheets("/lib/bootstrap/dist/css/bootstrap.min.css", "/css/site.css");
             })
                 .UseJsonStore("App_Data")                
-                .UseSimpleAuth();
+                .UseSimpleAuth(opts => opts.LoginPath = "/cms/login");
 
             services.AddMvc()
                 .UsePicnic("cms")
