@@ -11,9 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Picnic.Controllers;
-using Picnic.SimpleAuth.Extensions;
 using Picnic.Extensions;
-using Picnic.Stores.EF;
 using Samples.AspNetCore.Data;
 using Samples.AspNetCore.Models;
 using Samples.AspNetCore.Services;
@@ -47,13 +45,18 @@ namespace Samples.AspNetCore
             {
                 options.Manage.EditorOptions.EditorBaseUrl = "/js/tinymce";
                 options.Manage.EditorOptions.SetStylesheets("/lib/bootstrap/dist/css/bootstrap.min.css", "/css/site.css");
-            })
-                .UseJsonStore("App_Data")                
-                .UseSimpleAuth(opts => opts.LoginPath = "/cms/login");
+            }).UseJsonStore("App_Data");
 
-            services.AddMvc()
-                .UsePicnic("cms")
-                .UsePicnicSimpleAuth("cms");
+            // Step 2: Setup Authorization for Picnic
+            services.AddAuthorization(options => options.AddPolicy("PicnicAuthPolicy", policyOptions =>
+            {
+                // NOTE: This example allows anonymous access to the Picnic interface
+                // Add your application's policy specifics to control access to the Picnic interface
+                policyOptions.RequireAssertion(x => true);
+                policyOptions.Build();
+            }));
+
+            services.AddMvc().UsePicnic("cms");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,8 +74,6 @@ namespace Samples.AspNetCore
             }
 
             app.UseStaticFiles();
-
-            app.UsePicnicSimpleAuth();
 
             app.UseAuthentication();
 
