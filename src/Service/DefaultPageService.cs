@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Picnic.Model;
 using Picnic.Stores;
 
@@ -15,7 +16,7 @@ namespace Picnic.Service
         /// <summary>
         /// ctor the Mighty
         /// </summary>
-        public DefaultPageService(IGenericStore<Page> store) : base(store) { }
+        public DefaultPageService(IGenericStore<Page> store, IHttpContextAccessor httpContextAccessor) : base(store, httpContextAccessor) { }
 
 
         /// <summary>

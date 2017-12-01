@@ -15,7 +15,7 @@
 				@foreach (var message in messages)
 				{
 					var caption = message.Caption != null ? $"'{message.Caption}'" : "null";
-					<text>app.msg('@message.Type', @Html.Raw(caption), '@message.Text');</text>
+					<text>app.msg("@message.Type", @Html.Raw(caption), "@Html.Raw(message.Text)");</text>
 				}
 			});
 		</script>					

@@ -1,4 +1,8 @@
-﻿@using Picnic.Areas.Picnic.Controllers
+﻿@using Microsoft.AspNetCore.Mvc.ViewEngines
+@using Picnic.Areas.Picnic.Controllers
+@using Picnic.PluginModel
+@inject ICompositeViewEngine CompositeViewEngine
+
 @{
 	Layout = "_CoreLayout";
 }
@@ -19,6 +23,17 @@
 				<li><a href="@Url.Action(nameof(PageController.List), "Page")"><span class="glyphicon glyphicon-file"></span> Pages</a></li>
 				<li><a href="@Url.Action(nameof(ContentController.List), "Content")"><span class="glyphicon glyphicon-pencil"></span> Content</a></li>
 			</ul>						
+			
+			@* Render Plugin Menu Partials *@
+			@foreach (var plugin in PluginManifest.GetPlugins())
+			{
+				var viewPath = $"~/Plugin/{plugin.Name}/_Menu.cshtml";
+				if (this.CompositeViewEngine.GetView("", viewPath, false).Success)
+				{
+					@Html.Partial(viewPath)
+				}
+			}			
+
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="https://github.com/ctorx/picnic">Picnic @@ github</a></li>							
 			</ul>

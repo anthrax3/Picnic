@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Picnic.Model;
 using Picnic.Stores;
 
@@ -14,13 +15,15 @@ namespace Picnic.Service
     public abstract class GenericService<TEntity> : IGenericService<TEntity> where TEntity : class, IPicnicEntity
     {
         protected readonly IGenericStore<TEntity> Store;
+        readonly IHttpContextAccessor HttpContextAccessor;
 
         /// <summary>
         /// ctor the Mighty
         /// </summary>
-        protected GenericService(IGenericStore<TEntity> store)
+        protected GenericService(IGenericStore<TEntity> store, IHttpContextAccessor httpContextAccessor)
         {
             this.Store = store;
+            this.HttpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -163,8 +166,12 @@ namespace Picnic.Service
             }
 
             item.LastModifyDate = DateTime.Now;
-            // TODO: access username through auth mechanism somehow
-        }
-        
+
+            var userIdentity = this.HttpContextAccessor.HttpContext.User.Identity;
+            if (userIdentity != null)
+            {
+                item.LastModifyUser = userIdentity.Name;
+            }
+        }        
     }
 }
