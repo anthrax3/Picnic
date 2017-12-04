@@ -9,6 +9,11 @@ namespace Picnic.Options
     public class ManageOptions
     {
         /// <summary>
+        /// Gets or sets the RoutePrefix
+        /// </summary>
+        public string RoutePrefix { get; set; }
+
+        /// <summary>
         /// Gets or sets the Layout
         /// </summary>
         public string Layout { get; set; }
@@ -23,6 +28,7 @@ namespace Picnic.Options
         /// </summary>
         public static ManageOptions Default => new ManageOptions
         {
+            RoutePrefix = "picnic",
             Layout = null,
             EditorOptions = EditorOptions.Default
         };

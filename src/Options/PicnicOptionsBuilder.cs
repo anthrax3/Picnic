@@ -29,7 +29,7 @@ namespace Picnic.Options
         /// </summary>
         /// <param name="fileStorePath">The path on disk to the file store</param>
         /// <returns>PicnicOptionsBuilder with specified options</returns>
-        public PicnicOptionsBuilder UseJsonStore(string fileStorePath)
+        public PicnicOptionsBuilder UseJsonStore(string fileStorePath = "App_Data\\Picnic")
         {
             return this.UseJsonStore(x => x.FileStorePath = fileStorePath);
         }

@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Reflection;
 using ctorx.Core.Mvc;
 using ctorx.Core.Mvc.Messaging;
 using ctorx.Core.Mvc.Messaging.Extensions;
 using ctorx.Core.Mvc.Messaging.Options;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
 using Picnic.Areas;
 using Picnic.Controllers;
 using Picnic.Options;
@@ -30,6 +35,14 @@ namespace Picnic.Extensions
             services.AddScoped<IPageService, DefaultPageService>();            
 
             services.Configure(options ?? PicnicOptions.Default);
+            
+            // Apply Route prefix
+            var optionsprovider = (IOptions<PicnicOptions>)services.BuildServiceProvider().GetService(typeof(IOptions<PicnicOptions>));
+            var effectiveOptions = optionsprovider.Value;
+            services.Configure<MvcOptions>(opts => opts.Conventions.Insert(0, new PicnicPrefixAppModelConvention(effectiveOptions.Manage.RoutePrefix)));
+
+            // View Location Expanders
+            services.Configure<RazorViewEngineOptions>(razorViewEngineOptions => razorViewEngineOptions.FileProviders.Add(new EmbeddedFileProvider(typeof(ServiceCollectionExtensions).GetTypeInfo().Assembly)));
 
             return new PicnicOptionsBuilder(services);
         }

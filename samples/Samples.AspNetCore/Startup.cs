@@ -40,12 +40,15 @@ namespace Samples.AspNetCore
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
+            services.AddMvc();
+            
             // Step 1: Add Picnic, Use Json Store
             services.AddPicnic(options =>
             {
+                options.Manage.RoutePrefix = "cms";
                 options.Manage.EditorOptions.EditorBaseUrl = "/js/tinymce";
                 options.Manage.EditorOptions.SetStylesheets("/lib/bootstrap/dist/css/bootstrap.min.css", "/css/site.css");
-            }).UseJsonStore("App_Data");
+            }).UseJsonStore();
 
             // Step 2: Setup Authorization for Picnic
             services.AddAuthorization(options => options.AddPolicy("PicnicAuthPolicy", policyOptions =>
@@ -55,8 +58,6 @@ namespace Samples.AspNetCore
                 policyOptions.RequireAssertion(x => true);
                 policyOptions.Build();
             }));
-
-            services.AddMvc().UsePicnic("cms");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,7 +84,7 @@ namespace Samples.AspNetCore
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
                 
-                // Step 4: Add the Picnic Catch-All Route to enable dynamic pages
+                // Step 3: Add the Picnic Catch-All Route to enable dynamic pages
                 routes.AddPicnicDynamicPageRoute();
             });
         }
