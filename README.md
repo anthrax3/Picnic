@@ -10,7 +10,7 @@ It allows you to effortlessly create, manage and render both dynamic pages and i
 
 ## Getting Started
 
-#### Step 1: Add the Picnic.Extension Using Directive to your Startup.cs
+#### Step 1: Add the Picnic.Extensions using directive to your Startup.cs
 ```csharp
 using Picnic.Extensions;
 ```
