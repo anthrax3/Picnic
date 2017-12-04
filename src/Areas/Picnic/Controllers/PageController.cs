@@ -33,7 +33,7 @@ namespace Picnic.Areas.Picnic.Controllers
 
         [HttpGet]
         [Route("new")]
-        public async Task<IActionResult> New()
+        public IActionResult New()
         {
             return this.View();
         }

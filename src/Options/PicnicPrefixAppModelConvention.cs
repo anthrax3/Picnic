@@ -15,10 +15,11 @@ namespace Picnic.Options
         /// Creates a new PicnicAppModelConvention
         /// </summary>
         /// <param name="prefix">The prefix to be applied to picnic manage routes</param>
-        public PicnicPrefixAppModelConvention(string prefix = "picnic", string targetNamespace = null)
+        /// <param name="targetNamespace">The target namespace to apply the prefixing to</param>
+        public PicnicPrefixAppModelConvention(string prefix = null, string targetNamespace = null)
         {
             this.TargetNamespace = targetNamespace;
-            this.PrefixRouteModel = new AttributeRouteModel(new RouteAttribute(prefix));
+            this.PrefixRouteModel = new AttributeRouteModel(new RouteAttribute(prefix ?? ManageOptions.Default.RoutePrefix));
         }
 
         public void Apply(ApplicationModel application)

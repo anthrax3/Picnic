@@ -9,8 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
-using Picnic.Controllers;
 using Picnic.Extensions;
 using Samples.AspNetCore.Data;
 using Samples.AspNetCore.Models;
@@ -43,18 +41,14 @@ namespace Samples.AspNetCore
             services.AddMvc();
             
             // Step 1: Add Picnic, Use Json Store
-            services.AddPicnic(options =>
-            {
-                options.Manage.RoutePrefix = "cms";
-                options.Manage.EditorOptions.EditorBaseUrl = "/js/tinymce";
-                options.Manage.EditorOptions.SetStylesheets("/lib/bootstrap/dist/css/bootstrap.min.css", "/css/site.css");
-            }).UseJsonStore();
+            services.AddPicnic().UseJsonStore();
 
             // Step 2: Setup Authorization for Picnic
             services.AddAuthorization(options => options.AddPolicy("PicnicAuthPolicy", policyOptions =>
             {
                 // NOTE: This example allows anonymous access to the Picnic interface
                 // Add your application's policy specifics to control access to the Picnic interface
+                // If you're app doesn't have authentication, consider the Picnic.SimpleAuth package
                 policyOptions.RequireAssertion(x => true);
                 policyOptions.Build();
             }));
