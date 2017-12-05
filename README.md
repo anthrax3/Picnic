@@ -6,7 +6,7 @@ Picnic is a .NET Core class library offering simple CMS functionality along with
 Most of the existing content platforms and frameworks available are either too complicated, too restricted, or not easily used alongside an existing application.  When you have a simple app that requires content management and you don't want to invest in new technology, Picnic saves the day.
 
 ### Ok, but what does it do?
-It allows you to effortlessly create, manage and render both dynamic pages and inline content.
+It allows you to effortlessly create, manage and render both dynamic pages and inline content for existing ASP.NET Core web applications.
 
 ## Getting Started
 
