@@ -19,7 +19,7 @@ namespace Picnic.Options
         /// Gets the Stylesheets
         /// </summary>
         public IEnumerable<string> Stylesheets { get; private set; }
-
+        
         /// <summary>
         /// Gets or sets the EditorBaseUrl
         /// </summary>
